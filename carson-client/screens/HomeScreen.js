@@ -11,6 +11,7 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -19,62 +20,28 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+      <View>
+        <View style={styles.backgroundContainer}>
+          <Image source={require('../assets/images/background.png')} style={styles.backgroundImage} />
+        </View>
+        <View style={styles.bodyContainer}>
+          <View style={styles.centerContainer}>
             <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
+              source={require('../assets/images/carsonLogo.png')}
               style={styles.welcomeImage}
             />
           </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View
-              style={[
-                styles.codeHighlightContainer,
-                styles.homeScreenFilename,
-              ]}>
-              <MonoText style={styles.codeHighlightText}>
-                screens/HomeScreen.js
-              </MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
+          <View style={styles.centerContainer}>
+            <Image
+              source={require('../assets/images/micro.png')}
+              style={styles.actionButton}
+            />
           </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>
-              navigation/MainTabNavigator.js
-            </MonoText>
+          <View style={styles.centerContainer}>
+            <Image
+              source={require('../assets/images/sms.png')}
+              style={styles.actionButton}
+            />
           </View>
         </View>
       </View>
@@ -96,7 +63,7 @@ export default class HomeScreen extends React.Component {
         </Text>
       );
     } else {
-      return (
+        return (
         <Text style={styles.developmentModeText}>
           You are not in development mode, your app will run at full speed.
         </Text>
@@ -110,32 +77,36 @@ export default class HomeScreen extends React.Component {
     );
   };
 
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
+  _speakPaul = () => {
+    console.log("HEEYYYY")
+    Expo.Speech.speak("BONJOUR PAUL", {})
   };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+const styles = EStyleSheet.create({
+  backgroundImage: {
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+  bodyContainer: {
+    zIndex: 1000,
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    height: "100% - 20px",
   },
-  contentContainer: {
-    paddingTop: 30,
+  backgroundContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: -1,
   },
-  welcomeContainer: {
+  centerContainer: {
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+  },
+  actionButton: {
+    width: 500,
+    height: 500,
   },
   welcomeImage: {
     width: 100,
@@ -143,6 +114,15 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+  },
+
+  /*
+  developmentModeText: {
+    marginBottom: 20,
+    color: 'rgba(0,0,0,0.4)',
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: 'center',
   },
   getStartedContainer: {
     alignItems: 'center',
@@ -204,4 +184,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  */
 });
