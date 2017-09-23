@@ -141,3 +141,16 @@ def carson_tts():
             return(json.dumps({"response":"Je n'ai pas compris "}))
     return(json.dumps({"response":"Pas d'argument"}))
 
+@app.route("/api/converse", methods = ['GET', 'POST'])
+@crossdomain(origin='*')
+def carson_converse():
+    if 'text' in request.args:
+        if request.args['text']:
+            text = request.args['text']#.replace("_","/")
+            print(text)
+            out = rc.converse(text,lang="fr")
+            return(json.dumps({"response":out}))
+        else:
+            return(json.dumps({"response":"Je n'ai pas compris "}))
+    return(json.dumps({"response":"Pas d'argument"}))
+

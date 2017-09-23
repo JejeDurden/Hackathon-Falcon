@@ -20,6 +20,11 @@ def get_intent(text,lang="fr"):
     response = client.request.analyse_text(text)
     return response
 
+def converse(text,lang="fr"):
+    client = recastai.Client('f355b23fca612aba830c8754ee57c8c0', lang)
+    response = client.request.converse_text(text)
+    return response.reply
+
 def action(response):
     if response.intent.slug == 'YOUR_EXPECTED_INTENT':
         #"""Do your code..."""
