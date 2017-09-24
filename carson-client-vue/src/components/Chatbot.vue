@@ -29,6 +29,7 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       loading: false,
       messages: [
+      /*
         {
           from: 0, // CARSON
           content: 'Bonjour.'
@@ -49,6 +50,7 @@ export default {
           from: 0, // CARSON
           content: 'Tres bien.'
         }
+        */
       ],
       recorder: null,
       audio_context: null,
