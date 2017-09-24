@@ -1,9 +1,9 @@
 <template>
   <div>
     <div id="body">
-      <img :src="imagePath(tab)"/>
+      <img :src="imagePath(tab)" @click="changeTab(!tab ? 1 : tab)"/>
     </div>
-    <div id="nav">
+    <div id="nav" v-if="tab">
       <div :class="'navWrap' + (tab == 1 ? ' active' : '')">
         <img src="../assets/icon1.png" @click="changeTab(1)"/>
       </div>
@@ -29,11 +29,12 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      tab: 1
+      tab: 0
     }
   },
   methods: {
     changeTab: function (nb) {
+      console.log(nb)
       const vm = this
       vm.tab = nb
     },
